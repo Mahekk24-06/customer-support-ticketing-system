@@ -31,18 +31,6 @@ This Customer Support Ticketing System is designed to streamline communication b
 
 ---
 
-## Folder Structure
-
-```
-
-/client         → Frontend (HTML/CSS/JS)
-/server        → Backend (Node.js + Express)
-└── models    → Mongoose schemas (User, Ticket, Comment, etc.)
-└── routes    → API routes
-└── controllers → Logic handling
-
-```
-
 
 ## Future Enhancements
 
