@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - HelpDesk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f3f4f6;
+    }
+
+    header {
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 10px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      height: 70px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #4e54c8;
+    }
+
+    .nav-links a {
+      color: #4e54c8;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .login-hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding-top: 90px;
+    }
+
+    .login-container {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-content h1 {
+      color: #4e54c8;
+      margin-bottom: 10px;
+    }
+
+    .login-content p {
+      font-size: 0.95rem;
+      margin-bottom: 20px;
+      color: #555;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .btn-main {
+      width: 100%;
+      background-color: #4e54c8;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-main:hover {
+      background-color: #3b41b5;
+    }
+
+    #loginError {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: -10px;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    .already-account {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .already-account a {
+      color: #4e54c8;
+      text-decoration: none;
+    }
+
+    .already-account a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: #f1f5f9;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    @media screen and (max-width: 480px) {
+      .login-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">HelpDesk</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="signup.html">Sign Up</a>
+      <a href="about.html">About Us</a>
+    </nav>
+  </header>
+
+  <section class="login-hero">
+    <div class="login-container">
+      <div class="login-content">
+        <h1>Welcome Back</h1>
+        <p>Log in to continue managing your support tickets efficiently.</p>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required />
+          </div>
+
+          <p id="loginError">Invalid email or password</p>
+
+          <button type="submit" class="btn-main">Login</button>
+        </form>
+
+        <p class="already-account">
+          Don’t have an account? <a href="signup.html">Sign up here</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 HelpDesk. All rights reserved.</p>
+  </footer>
+
+  <script>
+  document.getElementById("loginForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const errorBox = document.getElementById("loginError");
+
+    try {
+      const res = await fetch("http://localhost:5000/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        // Optional: store user info in localStorage
+        localStorage.setItem("user", JSON.stringify(data));
+
+        // Normalize and redirect based on user role
+        const role = data.role;
+
+        if (role === "Admin") {
+          window.location.href = "admin-welcome.html"; 
+        } else if (role === "SupportAgent") {
+          window.location.href = "agent-welcome.html"; 
+        } else if (role === "Customer") {
+          window.location.href = "index.html"; 
+        } else {
+          errorBox.textContent = "Unknown user role.";
+          errorBox.style.display = "block";
+        }
+      } else {
+        errorBox.textContent = data.error || "Login failed. Please check your credentials.";
+        errorBox.style.display = "block";
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      errorBox.textContent = "Server error. Please try again later.";
+      errorBox.style.display = "block";
+    }
+  });
+</script>
+
+
+</body>
+</html>

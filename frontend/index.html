@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome - HelpDesk</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fc;
+    }
+
+    header {
+      background: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 10px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 70px;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #4e54c8;
+    }
+
+    .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .sidebar-wrapper {
+      display: flex;
+      margin-top: 70px; /* Push below header */
+    }
+
+    .sidebar-customer {
+      width: 250px;
+      background: #4e54c8;
+      height: calc(150vh - 70px); /* Full height minus header */
+      color: white;
+      padding-top: 40px;
+      position: sticky;
+      top: 70px;
+    }
+
+    .sidebar-nav a {
+      display: block;
+      padding: 12px 20px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .sidebar-nav a.active,
+    .sidebar-nav a:hover {
+      background-color: #6a72e0;
+      font-weight: bold;
+    }
+
+    .sidebar-main-content {
+      flex: 1;
+      padding: 40px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f0f0f0;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">HelpDesk</div>
+    <nav class="nav-links">
+      <a href="login.html">Home</a>
+      <a href="signup.html">Sign Up</a>
+      <a href="about.html">About Us</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <div class="sidebar-wrapper">
+
+    <!-- Sidebar -->
+    <aside class="sidebar-customer">
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="create-ticket.html">Create Ticket</a>
+        <a href="my-tickets.html">My Tickets</a>
+        <a href="help_center.html">Help</a>
+        <a href="logout.html">Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="sidebar-main-content">
+
+      <!-- Hero Image + Text -->
+      <section style="display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; padding-bottom: 40px;">
+        <img src="https://www.entegratedsolution.com/wp-content/uploads/2022/09/Integrated-Customer-Service-Ticketing-Helpdesk-Software-Features.webp" 
+            alt="Customer Support"
+            style="max-width: 500px; width: 100%; border-radius: 12px;" />
+        <div style="max-width: 500px;">
+           <h2 style="color: #070827; font-size: 2rem; margin-bottom: 10px;">Welcome User</h2>
+          <h2 style="color: #4e54c8; font-size: 2rem; margin-bottom: 10px;">Empower Your Support System</h2>
+          <p style="font-size: 1rem; color: #333;">
+            HelpDesk helps you manage customer issues effortlessly with real-time ticket tracking, smart collaboration tools, and role-based dashboards. Boost customer satisfaction and team productivity today!
+          </p>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features">
+        <h3 style="text-align: center; font-size: 1.8rem; color: #111;">Why Choose HelpDesk?</h3>
+        <div class="feature-grid" style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px; justify-content: center;">
+          <div class="feature-box" style="background: white; border-radius: 12px; padding: 20px; width: 220px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h3 style="color: #4e54c8;">Real-Time Ticketing</h3>
+            <p>Track and assign support tickets instantly with live status updates.</p>
+          </div>
+          <div class="feature-box" style="background: white; border-radius: 12px; padding: 20px; width: 220px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h3 style="color: #4e54c8;">Collaborative Tools</h3>
+            <p>Work with your team via internal notes, chat threads, and role-based access.</p>
+          </div>
+          <div class="feature-box" style="background: white; border-radius: 12px; padding: 20px; width: 220px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h3 style="color: #4e54c8;">Analytics & Reports</h3>
+            <p>Gain insights with intuitive dashboards and ticket resolution metrics.</p>
+          </div>
+          <div class="feature-box" style="background: white; border-radius: 12px; padding: 20px; width: 220px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+            <h3 style="color: #4e54c8;">Multi-Role Support</h3>
+            <p>Serve customers, agents, and admins with dedicated user interfaces.</p>
+          </div>
+        </div>
+      </section>
+
+    </div> <!-- End sidebar-main-content -->
+  </div> <!-- End sidebar-wrapper -->
+
+  <footer>
+    <p>&copy; 2025 HelpDesk. Designed with 💙</p>
+  </footer>
+
+</body>
+</html>

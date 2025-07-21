@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Logout - HelpDesk</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9fafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .logout-box {
+      background-color: white;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.08);
+      max-width: 400px;
+    }
+
+    h1 {
+      color: #4e54c8;
+      margin-bottom: 20px;
+    }
+
+    p {
+      margin-bottom: 30px;
+    }
+
+    a.button {
+      padding: 10px 20px;
+      background-color: #2563eb;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    a.button:hover {
+      background-color: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <div class="logout-box">
+    <h1>You have been logged out</h1>
+    <p>Thank you for using HelpDesk.</p>
+    <a href="login.html" class="button">Login Again</a>
+  </div>
+
+  <script>
+    // Optional: Clear user session (if stored in localStorage or sessionStorage)
+    localStorage.removeItem("userRole");
+    localStorage.removeItem("userEmail");
+    sessionStorage.clear(); // optional if you're using sessionStorage
+
+    // Optional: Log event
+    console.log("User has been logged out successfully.");
+  </script>
+</body>
+</html>

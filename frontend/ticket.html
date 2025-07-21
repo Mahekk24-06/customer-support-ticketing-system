@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tickets | HelpDesk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fc;
+      display: flex;
+    }
+    .mini-sidebar {
+      width: 260px;
+      background-color: #4e54c8;
+      color: white;
+      padding: 30px 20px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    .sidebar-logo {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .sidebar-nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 10px;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    .sidebar-nav a:hover,
+    .sidebar-nav .active {
+      background-color: #6674f4;
+      color: #ffe600;
+    }
+    .sidebar-main-content {
+      margin-left: 260px;
+      flex: 1;
+      padding: 40px;
+    }
+    .page-header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #6b7280;
+      margin-bottom: 30px;
+    }
+    table {
+      width: 100%;
+      background: #ffffff;
+      border-collapse: collapse;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+    th, td {
+      padding: 16px 20px;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+      color: #374151;
+      font-weight: 600;
+    }
+    tr:not(:last-child) {
+      border-bottom: 1px solid #e5e7eb;
+    }
+    tr:hover {
+      background: #f9fafb;
+    }
+    .status {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .open { background: #fee2e2; color: #b91c1c; }
+    .progress { background: #fef9c3; color: #92400e; }
+    .resolved { background: #d1fae5; color: #065f46; }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f1f5f9;
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: 40px;
+      border-top: 1px solid #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="mini-sidebar">
+    <div class="sidebar-logo">Support</div>
+    <nav class="sidebar-nav">
+      <a href="overview.html">Overview</a>
+      <a href="ticket.html" class="active">Tickets</a>
+      <a href="agents.html">Agents</a>
+      <a href="admin profile.html">Profile</a>
+      <a href="analytic.html">Analytics</a>
+      <a href="help_center.html">Help Center</a>
+    </nav>
+  </aside>
+
+  <main class="sidebar-main-content">
+    <div class="page-header">
+      <h1>Support Tickets</h1>
+      <p class="subtitle">All recent tickets submitted by users</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User</th>
+          <th>Subject</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="ticketTable">
+        <!-- JS will populate -->
+      </tbody>
+    </table>
+  </main>
+
+  <footer>&copy; 2025 HelpDesk Support System</footer>
+
+  <script>
+    const tickets = [
+      { id: 101, user: "Aman Patel", subject: "Login Issue", status: "open", date: "2025-07-03" },
+      { id: 102, user: "Sneha Rao", subject: "Payment Failed", status: "progress", date: "2025-07-02" },
+      { id: 103, user: "Vikram Singh", subject: "Bug in Dashboard", status: "resolved", date: "2025-07-01" }
+    ];
+
+    const tbody = document.getElementById("ticketTable");
+    tickets.forEach(ticket => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${ticket.id}</td>
+        <td>${ticket.user}</td>
+        <td>${ticket.subject}</td>
+        <td><span class="status ${ticket.status}">${ticket.status.charAt(0).toUpperCase() + ticket.status.slice(1)}</span></td>
+        <td>${ticket.date}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Ticket - HelpDesk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f3f4f6;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 200px;
+      height: 100vh;
+      background-color: #4e54c8;
+      color: #fff;
+      padding-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      left: 0;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+
+    .sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      margin: 10px 0;
+      padding: 12px 20px;
+      width: 100%;
+      text-align: left;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: #6a72e0;
+      font-weight: bold;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .header {
+      background-color: #fff;
+      padding: 15px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 10px;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    .logout-btn {
+      background-color: #ff4d4d;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .logout-btn:hover {
+      background-color: #e63b3b;
+    }
+
+    form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+      max-width: 600px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    form label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    form input,
+    form textarea,
+    form select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    form button {
+      background-color: #4e54c8;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #3b41b5;
+    }
+
+    @media screen and (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 15px 0;
+        position: relative;
+      }
+
+      .sidebar h2 {
+        display: none;
+      }
+
+      .main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      form {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <h2>HelpDesk</h2>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="create-ticket.html" class="active">Create Ticket</a>
+    <a href="my-tickets.html">My Tickets</a>
+    <a href="profile.html">Profile</a>
+    <a href="logout.html">Logout</a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="header">
+      <h1>Create Ticket</h1>
+      
+    </div>
+
+    <!-- Ticket Form -->
+    <form id="ticketForm">
+      <div class="form-group">
+        <label for="subject">Ticket Subject</label>
+        <input type="text" id="subject" placeholder="Enter subject" required />
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" required>
+          <option value="">Select category</option>
+          <option>Technical Issue</option>
+          <option>Billing</option>
+          <option>General Query</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" rows="5" placeholder="Describe the issue..." required></textarea>
+      </div>
+
+      <button type="submit">Submit Ticket</button>
+    </form>
+  </div>
+
+  <script>
+ document.getElementById("ticketForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const subject = document.getElementById("subject").value;
+  const description = document.getElementById("description").value;
+  const category = document.getElementById("category").value;
+
+  const res = await fetch("http://localhost:5000/api/tickets/create", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ subject, description, category, createdBy: "user123" })
+  });
+
+  const data = await res.json();
+  alert(data.message);
+});
+</script>
+
+</body>
+</html>

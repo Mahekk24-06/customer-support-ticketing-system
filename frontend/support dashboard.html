@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Support Agent Dashboard - HelpDesk360</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f1f5f9;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 230px;
+      background: linear-gradient(135deg, #4a00e0, #8e2de2);
+      color: white;
+      height: 100vh;
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      border-radius: 10px;
+      transition: 0.3s ease;
+      font-size: 16px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: scale(1.05);
+    }
+
+    .main {
+      margin-left: 250px;
+      padding: 40px;
+      width: 100%;
+    }
+
+    .main h1 {
+      font-size: 30px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .card p {
+      font-size: 28px;
+      font-weight: bold;
+      color: #4e54c8;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        height: auto;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .card p {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Agent Panel</h2>
+    <a href="support dashboard.html" class="active">Dashboard</a>
+    <a href="assigned tickets.html">Assigned Tickets</a>
+    <a href="../../login.html" onclick="logout()">Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>Welcome, Support Agent 👩‍💻</h1>
+    <div class="cards">
+      <div class="card">
+        <h3>Total Tickets Assigned</h3>
+        <p>12</p>
+      </div>
+      <div class="card">
+        <h3>Open Tickets</h3>
+        <p>5</p>
+      </div>
+      <div class="card">
+        <h3>In Progress</h3>
+        <p>4</p>
+      </div>
+      <div class="card">
+        <h3>Resolved</h3>
+        <p>3</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+  function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "../../login.html";
+  }
+</script>
+
+</body>
+</html>

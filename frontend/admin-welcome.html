@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Welcome - HelpDesk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background-color: #f0f4f8;
+    }
+
+    .sidebar {
+      width: 220px;
+      background: linear-gradient(180deg, #5f27cd, #8333ff);
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    .sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      padding: 12px;
+      border-radius: 8px;
+      transition: background 0.3s;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 60px 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 40px 50px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .card h1 {
+      font-size: 28px;
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+
+    .card p {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .btn-main {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #5f27cd, #8333ff);
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-main:hover {
+      background: linear-gradient(90deg, #4a1ec7, #7028e4);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding: 15px;
+        border-radius: 0;
+      }
+
+      .sidebar h2 {
+        display: none;
+      }
+
+      .main-content {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="overview.html">Overview</a>
+    <a href="agents.html">agents</a>
+    <a href="ticket.html">Manage Tickets</a>
+    <a href="analytic.html">analytic</a>
+    <a href="logout.html">Logout</a>
+  </div>
+
+  <div class="main-content">
+    <div class="card">
+      <h1>Welcome, Admin 👑</h1>
+      <p>You are logged in to the HelpDesk Admin Panel. Use the sidebar to manage users, tickets, and overall system settings efficiently.</p>
+    </div>
+  </div>
+
+  <script>
+    function goToDashboard() {
+      window.location.href = "admin-dashboard.html";
+    }
+  </script>
+
+</body>
+</html>

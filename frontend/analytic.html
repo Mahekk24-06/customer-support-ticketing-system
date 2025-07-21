@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Analytics | HelpDesk</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fc;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Sidebar */
+    .mini-sidebar {
+      width: 260px;
+      background-color: #4e54c8;
+      color: white;
+      padding: 30px 20px;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+
+    .sidebar-logo {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .sidebar-nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 10px;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar-nav a:hover,
+    .sidebar-nav .active {
+      background-color: #6674f4;
+      color: #ffe600;
+    }
+
+    /* Main Content */
+    .sidebar-main-content {
+      margin-left: 260px;
+      flex: 1;
+      padding: 40px;
+    }
+
+    .analytics-header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1f2937;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #6b7280;
+      margin-bottom: 40px;
+    }
+
+    .analytics-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .analytics-cards .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .analytics-cards .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .analytics-cards .card h3 {
+      font-size: 18px;
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    .analytics-cards .card p {
+      font-size: 24px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+
+    .analytics-chart h2 {
+      font-size: 22px;
+      color: #1f2937;
+      margin-bottom: 20px;
+    }
+
+    .chart-placeholder {
+      height: 300px;
+      background-color: #f3f4f6;
+      border: 2px dashed #cbd5e1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #6b7280;
+      font-size: 16px;
+      border-radius: 12px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #f1f5f9;
+      font-size: 14px;
+      color: #6b7280;
+      border-top: 1px solid #e5e7eb;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .mini-sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+      }
+
+      .sidebar-main-content {
+        margin-left: 0;
+        padding: 20px;
+      }
+
+      .analytics-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="mini-sidebar">
+      <div class="sidebar-logo">Support</div>
+      <nav class="sidebar-nav">
+        <a href="overview.html">Overview</a>
+        <a href="ticket.html">Tickets</a>
+        <a href="agent.html">Agents</a>
+        <a href="analytic.html" class="active">Analytics</a>
+        <a href="help_center.html">Help Center</a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="sidebar-main-content">
+      <section class="analytics-header">
+        <h1>Analytics Dashboard</h1>
+        <p class="subtitle">Track performance, trends, and key support metrics</p>
+      </section>
+
+      <!-- Summary Cards -->
+      <section class="analytics-cards">
+        <div class="card">
+          <h3>Total Tickets</h3>
+          <p id="totalTickets">1,245</p>
+        </div>
+        <div class="card">
+          <h3>Resolved</h3>
+          <p id="resolvedTickets">1,030</p>
+        </div>
+        <div class="card">
+          <h3>Avg. Response Time</h3>
+          <p id="responseTime">2h 15m</p>
+        </div>
+        <div class="card">
+          <h3>Satisfaction Rate</h3>
+          <p id="satisfactionRate">94%</p>
+        </div>
+      </section>
+
+      <!-- Chart Section -->
+      <section class="analytics-chart">
+        <h2>Monthly Tickets Overview</h2>
+        <div class="chart-placeholder" id="chartArea">
+          <p>[ Chart Placeholder ]</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    &copy; 2025 HelpDesk Support System. All rights reserved.
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Example JS: dynamic updates (replace with real data fetch if needed)
+    document.addEventListener("DOMContentLoaded", function () {
+      const total = document.getElementById("totalTickets");
+      const resolved = document.getElementById("resolvedTickets");
+      const satisfaction = document.getElementById("satisfactionRate");
+
+      // Simulate fetching from API
+      setTimeout(() => {
+        total.textContent = "1,300";
+        resolved.textContent = "1,120";
+        satisfaction.textContent = "96%";
+      }, 2000);
+
+      // Placeholder for future chart integration
+      const chartArea = document.getElementById("chartArea");
+      chartArea.addEventListener("click", () => {
+        chartArea.innerHTML = "<p>Chart integration coming soon!</p>";
+      });
+    });
+  </script>
+</body>
+</html>

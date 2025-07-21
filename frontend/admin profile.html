@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Profile - HelpDesk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f4f6fa;
+      color: #333;
+    }
+
+    /* Header Styles */
+    header {
+      background: #0d6efd;
+      padding: 15px 30px;
+      color: #fff;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .nav-links a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffc107;
+    }
+
+    /* Profile Section */
+    .profile-section {
+      padding: 60px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .profile-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .profile-container:hover {
+      transform: translateY(-5px);
+    }
+
+    .profile-card {
+      text-align: center;
+    }
+
+    .profile-name {
+      font-size: 28px;
+      color: #375f9b;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .profile-email {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .profile-details {
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .value {
+      color: #555;
+    }
+
+    /* Buttons */
+    .profile-actions {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn-main,
+    .btn-secondary {
+      padding: 10px 25px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-main {
+      background: #0d6efd;
+      color: #fff;
+      border: none;
+    }
+
+    .btn-main:hover {
+      background: #084298;
+    }
+
+    .btn-secondary {
+      background: #f8f9fa;
+      color: #0d6efd;
+      border: 2px solid #3b6db8;
+    }
+
+    .btn-secondary:hover {
+      background: #e2e6ea;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #554eb9;
+      color: #fff;
+      font-weight: 400;
+      margin-top: 210px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+       <h2>Admin Panel</h2>
+       <a href="overview.html">Overview</a>
+        <a href="ticket.html">Tickets</a>
+        <a href="agents.html" class="active">Agents</a>
+        <a href="analytic.html">Analytics</a>
+        <a href="help_center.html">Help Center</a>
+        <a href="admin profile.html">Profile</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="profile-section">
+    <div class="profile-container">
+      <div class="profile-card">
+        <h2 class="profile-name" id="userName">Admin User</h2>
+        <p class="profile-email" id="userEmail">admin@example.com</p>
+
+        <div class="profile-details">
+          <div class="detail-row">
+            <span class="label">Phone:</span>
+            <span class="value" id="userPhone">+91 99999 88888</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Department:</span>
+            <span class="value">IT Administration</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Role:</span>
+            <span class="value" id="userRole">Admin</span>
+          </div>
+        </div>
+
+        <div class="profile-actions">
+          <a href="agents.html" class="btn-main">Manage Users</a>
+          <a href="ticket.html" class="btn-secondary">View Tickets</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 HelpDesk. Designed with 💙</p>
+  </footer>
+
+  <script>
+    // Simulating dynamic data
+    const adminUser = {
+      name: "Admin User",
+      email: "admin@example.com",
+      phone: "+91 99999 88888",
+      role: "Admin"
+    };
+
+    window.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("userName").textContent = adminUser.name;
+      document.getElementById("userEmail").textContent = adminUser.email;
+      document.getElementById("userPhone").textContent = adminUser.phone;
+      document.getElementById("userRole").textContent = adminUser.role;
+    });
+  </script>
+
+</body>
+</html>

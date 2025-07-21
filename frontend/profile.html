@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile - HelpDesk</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo">HelpDesk</div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="profile.html" class="active">Profile</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="profile-section">
+    <div class="profile-container">
+      <div class="profile-card">
+        <h2 class="profile-name">Mahek Gandhi</h2>
+        <p class="profile-email">mahek@example.com</p>
+
+        <div class="profile-details">
+          <div class="detail-row">
+            <span class="label">Phone:</span>
+            <span class="value">+91 98765 43210</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Address:</span>
+            <span class="value">Ahmedabad, Gujarat, India</span>
+          </div>
+          <div class="detail-row">
+            <span class="label">Role:</span>
+            <span class="value">Customer</span>
+          </div>
+        </div>
+
+        <div class="profile-actions">
+          <a href="edit_profile.html" class="btn-main">Edit Profile</a>
+          <a href="vieworder.html" class="btn-secondary">View Orders</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const user = {
+  name: "Mahek Gandhi",
+  email: "mahek@example.com",
+  role: "Customer"
+};
+
+  window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("userName").textContent = user.name;
+  document.getElementById("userEmail").textContent = user.email;
+  document.getElementById("userRole").textContent = user.role;
+});
+</script>
+  <footer>
+    <p>&copy; 2025 HelpDesk. Designed with 💙</p>
+  </footer>
+
+</body>
+</html>

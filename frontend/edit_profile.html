@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Profile - HelpDesk</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <section class="edit-profile-section">
+    <div class="edit-container">
+      <h1>Edit Your Profile</h1>
+      <form class="edit-form">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Contact Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Shipping Address</label>
+          <textarea id="address" name="address" rows="4" placeholder="Enter your shipping address"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">Save Changes</button>
+          <a href="profile.html" class="btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </section>
+  <script>// Wait until the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  const editForm = document.querySelector(".edit-form");
+
+  editForm.addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    // Get form field values
+    const name = document.getElementById("fullName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    // Validate fields
+    if (!name || !email || !phone || !address) {
+      alert("Please fill in all fields.");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    if (!validatePhone(phone)) {
+      alert("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    // Simulate saving data (you can send this to a backend later)
+    alert("Your profile has been updated successfully!");
+    // Optionally, redirect to profile page
+    // window.location.href = "profile.html";
+  });
+
+  // Email validation
+  function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+
+  // Phone number validation (10 digits)
+  function validatePhone(phone) {
+    const regex = /^\d{10}$/;
+    return regex.test(phone);
+  }
+});
+</script>
+
+</body>
+</html>

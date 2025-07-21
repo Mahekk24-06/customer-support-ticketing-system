@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Tickets - HelpDesk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    /* Same layout styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f3f4f6;
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 240px;
+      background-color: #4e54c8;
+      color: #fff;
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+    .sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      margin: 10px 0;
+      padding: 12px 20px;
+      width: 100%;
+      text-align: left;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #3b41b5;
+    }
+    .main-content {
+     margin-left: 240px;   /* space for sidebar */
+     padding: 30px;
+     width: calc(100% - 240px);
+      }
+      #myticketheader{
+        padding: 0%;
+        margin: 5%;
+      }
+    
+        .header {
+      background-color: #fff;
+      padding: 15px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 10px;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      color: #333;
+    }
+    .logout-btn {
+      background-color: #ff4d4d;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .logout-btn:hover { background-color: #e63b3b; }
+
+    table {
+      width: 100%;
+      background: #fff;
+      border-collapse: collapse;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    }
+
+    th, td {
+      padding: 15px 20px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #f9fafb;
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: #f1f5ff;
+    }
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        height: auto;
+        padding: 10px;
+        position: relative;
+      }
+      .main-content {
+        margin-left: 0;
+        margin-top: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <h2>HelpDesk</h2>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="create-ticket.html">Create Ticket</a>
+    <a href="my-tickets.html" class="active">My Tickets</a>
+    <a href="profile.html">Profile</a>
+    <a href="logout.html">Logout</a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="header">
+      <h1 id="myticketheader">My Tickets</h1>
+      </div>
+      <!-- Dynamic Ticket Table -->
+      <div id="ticketsContainer"></div>
+    
+    </div>
+
+
+ <script>
+  async function fetchTickets() {
+    try {
+      const response = await fetch("http://localhost:5000/api/tickets"); // Make sure your backend route is correct
+      const tickets = await response.json();
+
+      const container = document.getElementById("ticketsContainer");
+      container.innerHTML = ""; // Clear previous content
+
+      if (tickets.length === 0) {
+        container.innerHTML = "<p>No tickets found.</p>";
+        return;
+      }
+
+      const wrapper = document.createElement("div");
+      wrapper.style.maxWidth = "1000px";
+      wrapper.style.margin = "0 auto";
+
+      // Create table
+      const table = document.createElement("table");
+      // ... rest of code
+
+      // Table headers
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Subject</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      `;
+
+      const tbody = table.querySelector("tbody");
+
+      tickets.forEach((ticket, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${ticket.subject}</td>
+          <td>${ticket.category}</td>
+          <td>${ticket.status}</td>
+          <td>${new Date(ticket.createdAt).toLocaleDateString()}</td>
+        `;
+        tbody.appendChild(row);
+      });
+      wrapper.appendChild(table);
+      container.appendChild(wrapper);
+
+    } catch (error) {
+      console.error("Error fetching tickets:", error);
+      document.getElementById("ticketsContainer").innerHTML = "<p>Failed to load tickets.</p>";
+    }
+  }
+
+  window.onload = fetchTickets;
+</script>
+
+</body>
+</html>

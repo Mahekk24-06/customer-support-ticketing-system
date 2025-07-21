@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Assigned Tickets - Support Agent</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f5f7fa;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 230px;
+      background: linear-gradient(135deg, #4a00e0, #8e2de2);
+      color: white;
+      height: 100vh;
+      padding: 25px 20px;
+      position: fixed;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      margin-bottom: 15px;
+      display: block;
+      padding: 10px 15px;
+      border-radius: 10px;
+      transition: 0.3s ease;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: scale(1.05);
+    }
+
+    .main {
+      margin-left: 250px;
+      padding: 40px;
+      width: 100%;
+    }
+
+    .main h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      color: #333;
+    }
+
+    textarea, select, button {
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #4e54c8;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3c42b5;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .main {
+        margin-left: 0;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Agent Panel</h2>
+    <a href="support dashboard.html">Dashboard</a>
+    <a href="assigned tickets.html" class="active">Assigned Tickets</a>
+    <a href="status.html">Ticket Status</a>
+    <a href="login.html" onclick="logout()">Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>Assigned Tickets</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Update Status</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Cannot Login to Account</td>
+          <td>Open</td>
+          <td>High</td>
+          <td>
+            <select>
+              <option>Open</option>
+              <option>In Progress</option>
+              <option>Resolved</option>
+            </select>
+            <button onclick="alert('Status updated')">Update</button>
+          </td>
+          <td>
+            <textarea placeholder="Add comment"></textarea>
+            <button onclick="alert('Comment added')">Submit</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Billing Issue</td>
+          <td>In Progress</td>
+          <td>Medium</td>
+          <td>
+            <select>
+              <option>Open</option>
+              <option selected>In Progress</option>
+              <option>Resolved</option>
+            </select>
+            <button onclick="alert('Status updated')">Update</button>
+          </td>
+          <td>
+            <textarea placeholder="Add comment"></textarea>
+            <button onclick="alert('Comment added')">Submit</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Feature Not Working</td>
+          <td>Open</td>
+          <td>Low</td>
+          <td>
+            <select>
+              <option selected>Open</option>
+              <option>In Progress</option>
+              <option>Resolved</option>
+            </select>
+            <button onclick="alert('Status updated')">Update</button>
+          </td>
+          <td>
+            <textarea placeholder="Add comment"></textarea>
+            <button onclick="alert('Comment added')">Submit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+<script>
+  function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>

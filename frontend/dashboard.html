@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard - HelpDesk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f3f4f6;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #4e54c8;
+      color: #fff;
+      padding-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    }
+
+    .sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      margin: 10px 0;
+      padding: 12px 20px;
+      width: 100%;
+      text-align: left;
+      transition: background 0.3s;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #3b41b5;
+    }
+
+    .main-content {
+      margin-left: 240px;
+      padding: 30px;
+      width: calc(100% - 240px);
+    }
+
+    .header {
+      background-color: #fff;
+      padding: 15px 30px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 10px;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+
+    .card h2 {
+      font-size: 2rem;
+      color: #4e54c8;
+    }
+
+    .card p {
+      font-size: 1rem;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        height: auto;
+        padding: 10px;
+        position: relative;
+      }
+      .main-content {
+        margin-left: 0;
+        margin-top: 100px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <h2>HelpDesk</h2>
+    <a href="dashboard.html" class="active">Dashboard</a>
+    <a href="create-ticket.html">Create Ticket</a>
+    <a href="my-tickets.html">My Tickets</a>
+    <a href="profile.html">Profile</a>
+    <a href="logout.html">Logout</a>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="header">
+      <h1>Dashboard</h1>
+    </div>
+
+    <div class="card-container">
+      <div class="card">
+        <h2 id="totalTickets">0</h2>
+        <p>Total Tickets</p>
+      </div>
+      <div class="card">
+        <h2 id="openTickets">0</h2>
+        <p>Open Tickets</p>
+      </div>
+      <div class="card">
+        <h2 id="resolvedTickets">0</h2>
+        <p>Resolved Tickets</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function loadDashboardStats() {
+      try {
+        const response = await fetch("http://localhost:5000/api/tickets");
+        const tickets = await response.json();
+
+        const total = tickets.length;
+        const open = tickets.filter(t => t.status.toLowerCase() === "open").length;
+        const resolved = tickets.filter(t => t.status.toLowerCase() === "resolved").length;
+
+        document.getElementById("totalTickets").innerText = total;
+        document.getElementById("openTickets").innerText = open;
+        document.getElementById("resolvedTickets").innerText = resolved;
+
+      } catch (error) {
+        console.error("Error loading dashboard stats:", error);
+      }
+    }
+
+    window.onload = loadDashboardStats;
+  </script>
+
+</body>
+</html>

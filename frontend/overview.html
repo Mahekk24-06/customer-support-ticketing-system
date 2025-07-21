@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Overview - HelpDesk360</title>
+  <link rel="stylesheet" href="../styles/style.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f1f5f9;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 230px;
+      background: linear-gradient(135deg, #4a00e0, #8e2de2);
+      color: white;
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      border-radius: 10px;
+      transition: 0.3s ease;
+      font-size: 16px;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: scale(1.05);
+    }
+
+    .main {
+      flex: 1;
+      padding: 40px;
+      overflow-y: auto;
+    }
+
+    .main h1 {
+      font-size: 28px;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card h2 {
+      margin-bottom: 20px;
+      color: #444;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat-box {
+      flex: 1;
+      min-width: 200px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease;
+    }
+
+    .stat-box:hover {
+      transform: scale(1.05);
+    }
+
+    .stat-box h3 {
+      font-size: 32px;
+      margin-bottom: 5px;
+    }
+
+    .stat-box p {
+      margin: 0;
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    ul#recentActivity {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul#recentActivity li {
+      padding: 10px 15px;
+      margin-bottom: 10px;
+      background-color: #f9fafb;
+      border-left: 5px solid #8e2de2;
+      border-radius: 8px;
+      color: #444;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+
+    ul#recentActivity li:hover {
+      background-color: #e9f0ff;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 15px;
+      }
+
+      .sidebar a {
+        font-size: 14px;
+        padding: 8px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="overview.html" class="active">Overview</a>
+    <a href="ticket.html">Tickets</a>
+    <a href="admin profile.html">Profile</a>
+    <a href="agents.html">Agents</a>
+    <a href="login.html" onclick="logout()">Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+
+    <div class="card">
+      <h2>Ticket Stats</h2>
+      <div class="stats">
+        <div class="stat-box">
+          <h3 id="openCount">0</h3>
+          <p>Open Tickets</p>
+        </div>
+        <div class="stat-box">
+          <h3 id="inProgressCount">0</h3>
+          <p>In Progress</p>
+        </div>
+        <div class="stat-box">
+          <h3 id="resolvedCount">0</h3>
+          <p>Resolved</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Recent Activity</h2>
+      <ul id="recentActivity">
+        <li>Loading recent activity...</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  const tickets = [
+    { status: "Open", subject: "Customer unable to reset password" },
+    { status: "In Progress", subject: "Email notifications not received" },
+    { status: "Resolved", subject: "Account locked issue" },
+    { status: "Open", subject: "App UI not loading" }
+  ];
+
+  document.getElementById("openCount").textContent = tickets.filter(t => t.status === "Open").length;
+  document.getElementById("inProgressCount").textContent = tickets.filter(t => t.status === "In Progress").length;
+  document.getElementById("resolvedCount").textContent = tickets.filter(t => t.status === "Resolved").length;
+
+  const activityList = document.getElementById("recentActivity");
+  activityList.innerHTML = "";
+
+  tickets.slice(0, 5).forEach(ticket => {
+    const li = document.createElement("li");
+    li.textContent = `${ticket.subject} [${ticket.status}]`;
+    activityList.appendChild(li);
+  });
+
+  function logout() {
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "../../login.html";
+  }
+</script>
+
+</body>
+</html>
